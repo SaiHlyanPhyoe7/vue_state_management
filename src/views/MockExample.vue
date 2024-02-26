@@ -1,6 +1,6 @@
 <template>
   <div class="w-full flex">
-    <select v-model="selectedResource" class="bg-indigo-400 p-4 rounded-md text-white w-1/6 h-fit">
+    <select v-model="selectedResource" class="bg-indigo-400 cursor-pointer p-4 rounded-md text-white w-1/6 h-fit">
       <option value="posts">Posts</option>
       <option value="comments">Comments</option>
       <option value="albums">Albums</option>
@@ -20,17 +20,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, watchEffect } from 'vue';
+import { ref, watchEffect } from 'vue';
 import axios from 'axios';
 import { Post, Comment, Album, Photo, Todo, User } from '../types/index';
 
 type ResourceData = Post[] | Comment[] | Album[] | Photo[] | Todo[] | User[];
 
 const selectedResource = ref('posts');
-const responseError = ref<string | null>(null);
-
-// 1. Race Condition
-
 const data = ref<ResourceData>([]);
 
 const fetchData = async () => {
@@ -38,10 +34,13 @@ const fetchData = async () => {
     const response = await axios.get(`https://jsonplaceholder.typicode.com/${selectedResource.value}`);
     let fetchedData: ResourceData = response.data;
 
+    if (selectedResource.value === 'photos') {
+      await new Promise(resolve => setTimeout(resolve, 3000)); // Delay for 3 seconds for photos
+    }
+
     data.value = fetchedData;
-  } catch (error:any) {
+  } catch (error) {
     console.error('Error fetching data:', error);
-    responseError.value = error.toString(); // Set the error message
   }
 };
 

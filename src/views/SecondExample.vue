@@ -1,6 +1,6 @@
 <template>
   <div class="w-full flex">
-    <select v-model="selectedResource" class="bg-indigo-400 p-4 rounded-md text-white w-1/6 h-fit">
+    <select v-model="selectedResource" class="bg-indigo-400 p-4 cursor-pointer rounded-md text-white w-1/6 h-fit">
       <option value="posts">Posts</option>
       <option value="comments">Comments</option>
       <option value="albums">Albums</option>
@@ -20,17 +20,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
+import { ref, watch, watchEffect } from 'vue';
 import axios from 'axios';
 import { Post, Comment, Album, Photo, Todo, User } from '../types/index';
 
 type ResourceData = Post[] | Comment[] | Album[] | Photo[] | Todo[] | User[];
 
 const selectedResource = ref('posts');
-const data = ref<ResourceData>([]);
 const responseError = ref<string | null>(null);
 
-// Standard fetch data function with watchEffect
+// 1. Race Condition
+
+const data = ref<ResourceData>([]);
 
 const fetchData = async () => {
   try {
@@ -53,7 +54,7 @@ watchEffect(() => {
 //   fetchData();
 // });
 
-// Function to get item title based on its type?
+// Function to get item title based on its type
 const getItemTitle = (item: Post | Comment | Album | Photo | Todo | User): string => {
   if ('title' in item) {
     return (item as Post | Album | Photo | Todo).title;

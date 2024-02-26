@@ -1,6 +1,6 @@
 <template>
   <div class="w-full flex">
-    <select v-model="selectedResource" class="bg-indigo-400 p-4 rounded-md text-white w-1/6 h-fit">
+    <select v-model="selectedResource" class="bg-indigo-400 cursor-pointer p-4 rounded-md text-white w-1/6 h-fit">
       <option value="posts">Posts</option>
       <option value="comments">Comments</option>
       <option value="albums">Albums</option>
@@ -13,6 +13,9 @@
 
     <!-- Error UI -->
     <div v-if="responseError" class="text-red-500">{{ responseError }}</div>
+
+    <!-- Loading UI -->
+    <div v-if="loading" class="text-emerald-500 text-center p-4">Loading .......</div>
 
     <ul v-if="data && !responseError" class="w-4/6">
       <li v-for="item in data" :key="item.id" class="capitalize">
