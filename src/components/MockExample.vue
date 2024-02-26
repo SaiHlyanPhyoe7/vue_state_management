@@ -28,19 +28,19 @@ type ResourceData = Post[] | Comment[] | Album[] | Photo[] | Todo[] | User[];
 
 const selectedResource = ref('posts');
 const data = ref<ResourceData>([]);
-const responseError = ref<string | null>(null);
-
-// Standard fetch data function with watchEffect
 
 const fetchData = async () => {
   try {
     const response = await axios.get(`https://jsonplaceholder.typicode.com/${selectedResource.value}`);
     let fetchedData: ResourceData = response.data;
 
+    if (selectedResource.value === 'photos') {
+      await new Promise(resolve => setTimeout(resolve, 3000)); // Delay for 3 seconds for photos
+    }
+
     data.value = fetchedData;
-  } catch (error:any) {
+  } catch (error) {
     console.error('Error fetching data:', error);
-    responseError.value = error.toString(); // Set the error message
   }
 };
 
@@ -53,7 +53,7 @@ watchEffect(() => {
 //   fetchData();
 // });
 
-// Function to get item title based on its type?
+// Function to get item title based on its type
 const getItemTitle = (item: Post | Comment | Album | Photo | Todo | User): string => {
   if ('title' in item) {
     return (item as Post | Album | Photo | Todo).title;

@@ -20,13 +20,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
+import { ref, watch, watchEffect } from 'vue';
 import axios from 'axios';
 import { Post, Comment, Album, Photo, Todo, User } from '../types/index';
 
 type ResourceData = Post[] | Comment[] | Album[] | Photo[] | Todo[] | User[];
 
 const selectedResource = ref('posts');
+const responseError = ref<string | null>(null);
+
+// 1. Race Condition
+
 const data = ref<ResourceData>([]);
 
 const fetchData = async () => {
@@ -34,19 +38,21 @@ const fetchData = async () => {
     const response = await axios.get(`https://jsonplaceholder.typicode.com/${selectedResource.value}`);
     let fetchedData: ResourceData = response.data;
 
-    if (selectedResource.value === 'photos') {
-      await new Promise(resolve => setTimeout(resolve, 3000)); // Delay for 3 seconds for photos
-    }
-
     data.value = fetchedData;
-  } catch (error) {
+  } catch (error:any) {
     console.error('Error fetching data:', error);
+    responseError.value = error.toString(); // Set the error message
   }
 };
 
 watchEffect(() => {
   fetchData();
 });
+
+// Watch for changes in selectedResource and trigger fetchData accordingly
+// watch(selectedResource, async (newValue, oldValue) => {
+//   fetchData();
+// });
 
 // Function to get item title based on its type
 const getItemTitle = (item: Post | Comment | Album | Photo | Todo | User): string => {
