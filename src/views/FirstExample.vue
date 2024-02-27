@@ -9,7 +9,7 @@
       <option value="users">Users</option>
     </select>
 
-    <h2 class="w-1/6 text-center pt-4" v-if="data">{{ selectedResource.toUpperCase() }} LIST</h2>
+    <h2 class="w-1/6 text-center pt-4">{{ selectedResource.toUpperCase() }} LIST</h2>
 
     <ul v-if="data" class="w-4/6">
       <li v-for="item in data" :key="item.id" class="capitalize">
@@ -22,9 +22,9 @@
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue';
 import axios from 'axios';
-import { Post, Comment, Album, Photo, Todo, User } from '../types/index';
 
-type ResourceData = Post[] | Comment[] | Album[] | Photo[] | Todo[] | User[];
+import { ResourceData } from '../types/index';
+import {getItemTitle} from '../utils/index';
 
 const selectedResource = ref('posts');
 const data = ref<ResourceData>([]);
@@ -53,14 +53,4 @@ watchEffect(() => {
 //   fetchData();
 // });
 
-// Function to get item title based on its type?
-const getItemTitle = (item: Post | Comment | Album | Photo | Todo | User): string => {
-  if ('title' in item) {
-    return (item as Post | Album | Photo | Todo).title;
-  } else if ('name' in item) {
-    return (item as Comment).name;
-  } else {
-    return (item as User).name;
-  }
-};
 </script>
