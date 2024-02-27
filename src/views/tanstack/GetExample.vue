@@ -52,13 +52,12 @@ const fetchTodoList = async ({ signal }: {signal: AbortSignal}) => {
 const { isSuccess, data, isError, error, isLoading, isFetching  } = useQuery<ResourceData>({
   queryKey: ['todos'],
   queryFn: fetchTodoList,
-  refetchInterval: 3000,
   // initialData: [
   //   {
   //     userId: 1,
   //     id: 1,
   //     title: 'Sai Hlyan Phyoe',
-  //     completed: false
+  //     completed: false,
   //   }
   // ],
 });
@@ -70,7 +69,7 @@ const invalidateTodoQueries = () => {
   queryClient.invalidateQueries({ queryKey: ['todos'] });
 };
 
-// watch(selectedResource, () => {
-//   invalidateTodoQueries();
-// });
+watch(selectedResource, () => {
+  invalidateTodoQueries();
+});
 </script>
