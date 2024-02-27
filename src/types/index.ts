@@ -58,3 +58,4 @@ export interface User {
   }
 }
 
+export type ResourceData = Post[] | Comment[] | Album[] | Photo[] | Todo[] | User[];
