@@ -38,7 +38,6 @@ import {getItemTitle} from '../utils/index';
 import { AxiosError } from 'axios';
 
 const selectedResource = ref('posts');
-const responseError = ref<string | null>(null);
 
 // 1. Fix the Race Condition Bugs
 // 2. Loading State 
@@ -46,6 +45,7 @@ const responseError = ref<string | null>(null);
 // 4. Data & Error are not reset when category changes
 
 const data = ref<ResourceData | undefined>(undefined);
+const responseError = ref<string | null>(null);
 let ignore = false; // To ignore subsequent fetch requests while one is ongoing
 
 const loading = ref(false); // Loading state variable

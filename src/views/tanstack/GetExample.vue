@@ -49,17 +49,9 @@ const fetchTodoList = async ({ signal }: {signal: AbortSignal}) => {
   return response.json();
 };
 
-const { isSuccess, data, isError, error, isLoading, isFetching  } = useQuery<ResourceData>({
+const { isSuccess, data, isError, error, isLoading, isFetching } = useQuery<ResourceData>({
   queryKey: ['todos'],
   queryFn: fetchTodoList,
-  // initialData: [
-  //   {
-  //     userId: 1,
-  //     id: 1,
-  //     title: 'Sai Hlyan Phyoe',
-  //     completed: false,
-  //   }
-  // ],
 });
 
 const isEmpty = computed(() => data.value !== undefined && data.value.length === 0);

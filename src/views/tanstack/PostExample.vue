@@ -17,7 +17,7 @@
         <label for="userId">User ID:</label>
         <input class="border rounded-lg px-4 py-2 min-w-40" id="userId" v-model.number="userId" type="number">
       </div>
-      <button @click="createPost" class="rounded-md bg-emerald-500 text-white px-4 py-2">Create Post</button>
+      <button :disabled="isPending" @click="createPost" class="rounded-md disabled:bg-gray-400 disabled:cursor-not-allowed bg-emerald-500 text-white px-4 py-2">Create Post</button>
     </div>
   </div>
 </template>
@@ -55,5 +55,5 @@ const createPost = () => {
   });
 };
 
-const { isSuccess, isError, error } = createPostMutation;
+const { isSuccess, isError, error, isPending } = createPostMutation;
 </script>
