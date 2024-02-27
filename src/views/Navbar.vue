@@ -4,12 +4,12 @@
       <div class="container mx-auto flex justify-between items-center">
         <router-link to="/" class="text-2xl font-bold">Vue 3</router-link>
         <div class="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
-          <router-link to="/" :class="{ 'duration-300 bg-sky-400 underline-offset-4 xl:scale-150': isCurrentPath('/') }" class="mx-2 hover:underline underline-offset-4 decoration-sky-400 duration-500 hover:text-sky-100 p-4">First Example</router-link>
-          <router-link to="/second" :class="{ 'duration-300 bg-sky-400 underline-offset-4 xl:scale-150': isCurrentPath('/second') }" class="mx-2 hover:underline underline-offset-4 decoration-sky-400 duration-500 hover:text-sky-100 p-4">Second Example</router-link>
-          <router-link to="/mock-example" :class="{ 'duration-300 bg-sky-400 underline-offset-4 xl:scale-150': isCurrentPath('/mock-example') }" class="mx-2 hover:underline underline-offset-4 decoration-sky-400 duration-500 hover:text-sky-100 p-4">mock-example</router-link>
-          <router-link to="/fix-all-condition" :class="{ 'duration-300 bg-sky-400 underline-offset-4 xl:scale-150': isCurrentPath('/fix-all-condition') }" class="mx-2 hover:underline underline-offset-4 decoration-sky-400 duration-500 hover:text-sky-100 p-4">fix-all-condition</router-link>
-          <router-link to="/get-tanstack-example" :class="{ 'duration-300 bg-sky-400 underline-offset-4 xl:scale-150': isCurrentPath('/get-tanstack-example') }" class="mx-2 hover:underline underline-offset-4 decoration-sky-400 duration-500 hover:text-sky-100 p-4">get-tanstack-example</router-link>
-          <router-link to="/post-tanstack-example" :class="{ 'duration-300 bg-sky-400 underline-offset-4 xl:scale-150': isCurrentPath('/post-tanstack-example') }" class="mx-2 hover:underline underline-offset-4 decoration-sky-400 duration-500 hover:text-sky-100 p-4">post-tanstack-example</router-link>
+          <router-link to="/" :class="{ 'duration-300 bg-sky-400 underline-offset-4 xl:scale-110': isCurrentPath('/') }" class="mx-2 hover:underline underline-offset-4 decoration-sky-400 duration-500 hover:text-sky-100 p-4">First Example</router-link>
+          <router-link to="/second" :class="{ 'duration-300 bg-sky-400 underline-offset-4 xl:scale-110': isCurrentPath('/second') }" class="mx-2 hover:underline underline-offset-4 decoration-sky-400 duration-500 hover:text-sky-100 p-4">Second Example</router-link>
+          <router-link to="/mock-example" :class="{ 'duration-300 bg-sky-400 underline-offset-4 xl:scale-110': isCurrentPath('/mock-example') }" class="mx-2 hover:underline underline-offset-4 decoration-sky-400 duration-500 hover:text-sky-100 p-4">mock-example</router-link>
+          <router-link to="/fix-all-condition" :class="{ 'duration-300 bg-sky-400 underline-offset-4 xl:scale-110': isCurrentPath('/fix-all-condition') }" class="mx-2 hover:underline underline-offset-4 decoration-sky-400 duration-500 hover:text-sky-100 p-4">fix-all-condition</router-link>
+          <router-link to="/get-tanstack-example" :class="{ 'duration-300 bg-sky-400 underline-offset-4 xl:scale-110': isCurrentPath('/get-tanstack-example') }" class="mx-2 hover:underline underline-offset-4 decoration-sky-400 duration-500 hover:text-sky-100 p-4">get-tanstack-example</router-link>
+          <router-link to="/post-tanstack-example" :class="{ 'duration-300 bg-sky-400 underline-offset-4 xl:scale-110': isCurrentPath('/post-tanstack-example') }" class="mx-2 hover:underline underline-offset-4 decoration-sky-400 duration-500 hover:text-sky-100 p-4">post-tanstack-example</router-link>
         </div>
       </div>
     </nav>
