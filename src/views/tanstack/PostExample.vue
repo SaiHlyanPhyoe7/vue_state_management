@@ -24,15 +24,15 @@
 
 <script setup lang="ts">
 import { useMutation } from '@tanstack/vue-query';
+import axios from 'axios';
 
 const createPostMutation = useMutation({
-  mutationFn: (newPost: any) => {
-    return fetch('https://jsonplaceholder.typicode.com/posts', {
-      method: 'POST',
+  // Updated mutationFn using axios
+  mutationFn: async (newPost: any) => {
+    return await axios.post('https://jsonplaceholder.typicode.com/posts', newPost, {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(newPost)
     });
   },
   onError: (error) => {

@@ -36,17 +36,19 @@ import { computed, ref, watch } from 'vue';
 import { useQuery, useQueryClient } from '@tanstack/vue-query';
 import { ResourceData } from '../../types/index';
 import { getItemTitle } from '../../utils/index';
+import axios from 'axios';
 
 const selectedResource = ref('posts');
 
 const fetchTodoList = async ({ signal }: {signal: AbortSignal}) => {
-  const response = await fetch(`https://jsonplaceholder.typicode.com/${selectedResource.value}`, {
-    signal
-  });
-  if (!response.ok) {
+  try {
+    const response = await axios.get(`https://jsonplaceholder.typicode.com/${selectedResource.value}`, {
+      signal
+    });
+    return response.data;
+  } catch (error) {
     throw new Error('Failed to fetch data');
   }
-  return response.json();
 };
 
 const { isSuccess, data, isError, error, isLoading, isFetching } = useQuery<ResourceData>({
